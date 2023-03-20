@@ -3,8 +3,22 @@ version: 2.1
 orbs:
   flutter: circleci/flutter@2.0
 
+
+jobs:
+   build_web:
+      - flutter/install_sdk_and_pub:
+          version: 3.7.7
+      - run:
+        command: "flutter build web"
+
 workflows:
   test:
     jobs:
       - flutter/lint:
           version: 3.7.7
+
+  build_web_prod:
+    jobs:
+      - build_web
+
+

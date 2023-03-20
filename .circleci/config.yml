@@ -1,19 +1,11 @@
 version: 2.1
-orbs:
-  flutter: circleci/flutter@2.0.0
-
 jobs:
-  build_web:
-    macos:
-      xcode: 14.2
+  build:
+    docker:
+      - image: cirrusci/flutter
+    
     steps:
-      - flutter/install_sdk_and_pub:
-          version: 3.7.7
-      - run:
-          command: "flutter build web"
-          working_directory: ios
-
-workflows:
-  build_web:
-    jobs:
-      - build_web
+      - checkout
+      - run: flutter doctor
+      - run: flutter test 
+      - run: flutter build web

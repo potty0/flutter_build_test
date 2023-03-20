@@ -1,24 +1,19 @@
 version: 2.1
-
 orbs:
-  flutter: circleci/flutter@2.0
-
+  flutter: circleci/flutter@2.0.0
 
 jobs:
-   build_web:
+  build_web:
+    macos:
+      xcode: 14.2
+    steps:
       - flutter/install_sdk_and_pub:
           version: 3.7.7
       - run:
-        command: "flutter build web"
+          command: "flutter build web"
+          working_directory: ios
 
 workflows:
-  test:
-    jobs:
-      - flutter/lint:
-          version: 3.7.7
-
-  build_web_prod:
+  build_web:
     jobs:
       - build_web
-
-
